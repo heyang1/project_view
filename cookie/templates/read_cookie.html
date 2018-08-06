@@ -1,0 +1,21 @@
+<html>
+    <body>
+        <h1>读取cookie</h1>
+        <div>
+            <h2>从后台读取的cookie:</h2>
+            <div>
+
+                {% for k, v in cookies.items %}
+                    {{ k }} -- {{ v }}<br/>
+                {% endfor %}
+
+            </div>
+        </div>
+        <h2>前台读取的cookie</h2>
+        <div id="show"></div>
+    </body>
+    <script>
+        var cookies = document.cookie;
+        document.getElementById('show').innerHTML = cookies
+    </script>
+</html>

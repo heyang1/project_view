@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试过滤器</title>
+</head>
+<body>
+    <h1>用户信息：</h1>
+    <p><label>姓名：</label><span>{{ userName|upper }}</span></p> {# 这是大写 #}
+    <p><label>性别：</label><span>{% if gender == 1 %}男{% else %}女{% endif %}</span></p>
+    <p><label>身高：</label><span>{{ height}}-{{ height|floatformat }}-{{ height|floatformat:2 }}</span></p>{# 浮点数精确位数 #}
+    <p><label>生日：</label><span>{{ birthday|date:'Y-m-d'}}</span></p> {# 日期格式化 #}
+    <p><label>生日：</label><span>{{ birthday|date:'y-M-D'}}</span></p>{# 日期格式化 #}
+    <p><label>生日：</label><span>{{ birthday|date:'Y-m-d h:i:s a'}}</span></p>{# 日期时间格式化 #}
+    <p><label>标签：</label><span>{{ tags|join:' | ' }}</span></p>{# list格式化 #}
+    {% if tags|length_is:0 %}{# list长度判断  length_is:0也就是：length=0#}
+        <p><label>存款：</label><span>{{ cash|default:999999999 }}</span></p>
+    {% else %}
+        <p><label>穷：</label><span>{{ cash|default:0 }}</span></p>
+    {% endif %}
+</body>
+</html>

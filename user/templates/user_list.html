@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+</head>
+<body>
+   <h1>用户列表</h1>
+    {% for user in object_list %}
+        <li>{{user.userName}} -- {{ user.password }}</li>
+    {% endfor %}
+    总记录数： {{ paginator.count }}<br>
+    总页数： {{ paginator.num_pages }}<br>
+    分页导航：
+        {% for num in paginator.page_range %}
+            <a href="?page={{ num }}">{{ num }}</a>
+        {% endfor %}
+    <br>
+    当前页： {{ page_obj }}
+</body>
+</html>

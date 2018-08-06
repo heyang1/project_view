@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表展示</title>
+</head>
+<body>
+    <h1>部门信息列表</h1>
+    <table border="1" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>部门编号</th>
+            <th>部门名称</th>
+            <th>部门地址</th>
+        </tr>
+        {% for obj in objs %}
+                <tr>
+                    <td>{{ obj.deptNo }}</td>
+                    <td>{{ obj.dname }}</td>
+                    <td>{{ obj.loc }}</td>
+                </tr>
+        {% endfor %}
+
+    </table>
+</body>
+</html>

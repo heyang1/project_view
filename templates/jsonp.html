@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSONP访问数据</title>
+</head>
+<body>
+    <h1>欢迎来到Jsonp的学习</h1>
+
+{#    <script>#}
+{#        function abc(resp) {#}
+{#            console.log(resp)#}
+{#        }#}
+{#    </script>#}
+{#    <script src="http://127.0.0.1:8000/jsonp/callback?callback=abc"></script>#}
+{#    #}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            {#$.getJSON('http://127.0.0.1:8000/jsonp/callback?callback=?', {}, function(resp) {#}
+            {#    alert(resp)#}
+            {#});#}
+            $.ajax({
+                'url': 'http://127.0.0.1:8000/jsonp/callback?callback=?',
+                'type': 'get',
+                'dataType': 'jsonp', // 返回jsonp进行处理
+                'success': function(resp) {
+                    alert(resp)
+                }
+            })
+        });
+    </script>
+
+
+</body>
+</html>

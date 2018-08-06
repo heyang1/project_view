@@ -1,0 +1,110 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#b01").click(function(){
+      /*
+      第一种方式：
+       $.ajax({
+              'url': "test1/",
+              'type':'get',
+              'dataType':'text',
+              'success': function(resp){
+                    console.log(resp);
+                    $("#myDiv").html(resp);
+               }
+        });*/
+      $.get('test1/', {}, function(resp){
+          $("#myDiv").html(resp);
+      });
+  });
+
+
+  $("#b02").click(function(){
+      /*
+      第一种方式：
+       $.ajax({
+              'url': "test2/",
+              'type':'get',
+              //'dataType':'json',
+              'success': function(resp){
+                   {#resp = eval(resp);#}
+                  {#resp = JSON.parse(resp);#}
+                   console.log(typeof resp);
+                    console.log(resp);
+                    $("#myDiv2").html(resp.abc);
+               }
+        });
+    $.getJSON('test2/', {}, function(resp){
+        $("#myDiv2").html(resp.abc);
+    });*/
+        $.get('test2/', {}, function(resp){
+              $("#myDiv2").html(resp.abc);
+        });
+  });
+
+  // 通过主键id获取salegrade的数据，进行展示
+    $("#btn_sal").click(function(){
+        {#alert($("#id").val());#}
+        var data = {'id': $("#id").val()};
+        $.ajax({
+                url: 'get_salegrade/',
+                type: 'get',
+                dataType: 'json',
+                data: data,
+                success: function(resp) {
+                    console.log(resp);
+                    if (resp != null && resp.lowsal != null) {
+                        $("#show").html(resp.lowsal + "---" + resp.higsal)
+                    } else {
+                        $("#show").html('没有找到内容')
+                    }
+
+                },
+                error: function(){
+                    $("#show").html('请求失败')
+                }
+        })
+    });
+
+
+    // ajax put请求后台，返回响应数据
+    $("#b03").click(function(){
+        $.ajax({
+            url:'update/',
+            type: 'put',
+            dataType: 'json',
+            data: {'phone': '1360000000', email:'a@bb.com'},
+            success: function(resp) {
+                console.log(resp)
+                $("#myDiv3").html(resp.message)
+            }
+
+        })
+    });
+
+
+
+})
+</script>
+</head>
+<body>
+
+    <div id="myDiv"><h2>通过 AJAX 改变文本</h2></div>
+    <div id="myDiv2"><h2>通过 AJAX 打印JSON数据</h2></div>
+    <div id="myDiv3"><h2>通过 AJAX 打印PUT返回数据</h2></div>
+    <button id="b01" type="button">改变内容</button>
+    <button id="b02" type="button">获取JSON内容</button>
+
+    <p>
+        <label>输入工资等级ID：</label><input type="text" id="id" placeholder="请输入工资等级ID" />
+        <button type="button" id="btn_sal" >获取</button>
+    </p>
+    <p>显示工资等级：<span id="show"></span></p>
+
+    <button id="b03" type="button">PUT请求</button>
+
+
+</body>
+</html>

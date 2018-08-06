@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>操作Cookie</title>
+</head>
+<body>
+    <div>
+        <p>
+            key:&nbsp&nbsp&nbsp <input id="cookie_key" /><br>
+            value:&nbsp<input id="cookie_value" /><br>
+        </p>
+        <div style="margin-top: 10px;">
+            <button onclick="set()">设置Cookie</button>
+            <button onclick="get()">获取Cookie</button>
+            <button onclick="remove()">删除Cookie</button>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script>
+        function set() {
+            var key = document.getElementById('cookie_key').value;
+            var value = document.getElementById('cookie_value').value;
+            // setCookie(key, value, '/', '127.0.0.1', 1);
+            $.cookie(key, value, {'expires':7, path: '/'})
+        }
+
+        function get() {
+            var key = document.getElementById('cookie_key').value;
+            // var value = getCookie(key);
+            var value = $.cookie(key);
+            console.log(value);
+        }
+
+        function remove() {
+            var key = document.getElementById('cookie_key').value;
+            // deleteCookie(key, '/', '127.0.0.1');
+            $.removeCookie(key, {path: '/'});
+            // $.cookie(key, '', {expires:0})
+        }
+        /**
+         * 设置cookie
+         * @param key
+         * @param value
+         * @param path
+         * @param domain
+         * @param expiredays
+         */
+        function setCookie(key,value,path,domain,expiredays) {
+            if (path == null) {
+                path = '/';
+            }
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + expiredays);
+            value = encodeURIComponent(value);
+            cookies = key + '=' + value + ";path=" + path + ";domain=" + domain + ";expires=" + exdate;
+            document.cookie = cookies
+        }
+        /**
+         * 获取cookie
+         * @param key
+         * @returns {string}
+         */
+        function getCookie(key) {
+            var cookies = document.cookie;
+            // console.log(cookies)
+            // 1112=1111; a=1
+            var cookie_array = cookies.split(';');
+            for (var i = 0; i < cookie_array.length; i++) {
+                var cookie = cookie_array[i]; // key=value
+                var _cookie = cookie.split('=');
+                if (key == _cookie[0].trim()) {
+                    var value = _cookie[1].trim();
+                    // 解码
+                     value = decodeURIComponent(value);
+                    return value;
+                }
+            }
+            return '';
+        }
+
+        /**
+         * 删除cookie，即将cookie设置过期
+         * @param key
+         */
+        function deleteCookie(key, path, domain) {
+            if (path == null) {
+                path = '/';
+            }
+            setCookie(key, '', path, domain, -1)
+        }
+    </script>
+</body>
+</html>

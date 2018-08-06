@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>模板首页</title>
+        <meta charset="UTF-8" >
+    </head>
+
+    <body>
+        {% include 'common.html' %}
+        <div>展示: {{ user.show }}</div>
+        <div>年龄: {{ user.age }}</div>
+        <div>用户名: {{ user.userName }}</div>
+        <div>密码: {{ user.password }}</div>
+
+    </body>
+
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <div>
+        <p><a href="{% url 'get_app:handler_one' %}?a=hello&b=world">一键一值</a></p>
+        <p><a href="{% url 'get_app:handler_multi' %}?a=hello&a=hello2&b=world&b=world2">一键多值</a></p>
+    </div>
+</body>
+</html>

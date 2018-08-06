@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSRF跨站请求伪造</title>
+</head>
+<body>
+    <h1>模拟一下跨站请求:</h1>
+    <form action="{% url 'csrf:form' %}" method="post">
+        {% csrf_token %}
+        <p><label>用户名：</label><input name="name" placeholder="输入用户名" /></p>
+        <div><lable>自我介绍：</lable><textarea style="width: 271px; height: 68px" name="introduce"></textarea></div>
+        <button type="submit" >提交</button>
+    </form>
+</body>
+</html>

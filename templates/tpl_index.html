@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>模板首页</title>
+        <meta charset="UTF-8" >
+    </head>
+
+    <body>
+        {% include 'common.html'  %}
+        <div>debug: {{ debug }}</div>
+        <div>request: {{ request.method }}/{{ request.path }}/{{ request.session.userName }}/{{ request.COOKIES }}</div>
+        <div>auth: {{ auth }}</div>
+        <div>message: {% for message in messages %}
+        {{ message }}
+    {% endfor %}</div>
+    </body>
+
+</html>

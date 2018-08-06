@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表展示</title>
+</head>
+<body>
+    <h1>员工信息列表</h1>
+    <table border="1" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>员工编号</th>
+            <th>员工姓名</th>
+            <th>员工薪水</th>
+            <th>员工部门</th>
+            <th>上级领导</th>
+            <th>入职日期</th>
+        </tr>
+        {% for obj in objs %}
+                <tr>
+                    <td>{{ obj.empNo }}</td>
+                    <td>{{ obj.ename }}</td>
+                    <td>{{ obj.sal }}</td>
+                    <td>{{ obj.dept.dname }}</td>
+                    <td>{{ obj.mgr.ename }}</td>
+                    <td>{{ obj.hireDate }}</td>
+                </tr>
+        {% endfor %}
+        <p>
+            <label>输入工资等级ID：</label><input type="text" id="id" placeholder="请输入工资等级ID" />
+            <button type="button" onclick="get();" >获取</button>
+        </p>
+        <p>显示工资等级：<span id="show"></span></p>
+{#        <tr>#}
+{#            <td>1</td>#}
+{#            <td>张三</td>#}
+{#            <td>1000</td>#}
+{#            <td>研发部</td>#}
+{#            <td>张怡彪</td>#}
+{#            <td>2009-10-01</td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td>1</td>#}
+{#            <td>张三</td>#}
+{#            <td>1000</td>#}
+{#            <td>研发部</td>#}
+{#            <td>张怡彪</td>#}
+{#            <td>2009-10-01</td>#}
+{#        </tr>#}
+
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        function get() {
+            // 获取输入的等级主键id的值
+            var id = $("#id").val();
+            // 发起ajax请求
+            var url = '/employee/salegrade/' + id + '/';
+            alert(url);
+
+            $.ajax({
+                'url': url, // 请求url
+                'type':'get', // 请求方式
+                'dataType': 'json', // 接收响应的数据格式json/html/text等
+                'success': function(resp){ // 处理请求成功的回调函数
+                    alert(resp);
+                    if (resp != null && resp.code != null && resp.code == 500){
+                         $("#show").html("没有找到。。")
+                    } else {
+                        $("#show").html(resp.lowsal +"---"+ resp.higsal)
+                    }
+
+                },
+                'error': function () { // 处理失败的回调函数
+                    console.log('处理失败。。')
+                },
+                'complete': function() { // 处理结束的回调函数
+                    console.log('请求结束。。')
+                }
+            })
+
+        }
+    </script>
+
+</body>
+</html>

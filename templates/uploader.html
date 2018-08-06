@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传</title>
+</head>
+<body>
+    <h1>文件上传</h1>
+    <form action="{% url 'uploader:upload' %}" enctype="multipart/form-data" method="post" >
+        {% csrf_token %}
+        <div>姓名：<input name="name" placeholder="请输入姓名" /></div>
+        <div style="margin-top: 10px;">年龄：<input name="age" placeholder="请输入姓名" /></div>
+        <div style="margin-top: 10px;">头像：<input type="file" name="myfile" /></div>
+        <button type="submit" style="margin-top: 10px;">注册</button>
+    </form>
+</body>
+</html>

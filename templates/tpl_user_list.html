@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>模板首页</title>
+        <meta charset="UTF-8" >
+    </head>
+
+    <body>
+        {% include 'common.html' %}
+        <h1>用户列表展示:</h1>
+        <table cellspacing="0" cellpadding="0" border="1">
+            <tr>
+                <th>序号</th>
+                <th>用户ID</th>
+                <th>用户名字</th>
+                <th>密码</th>
+                <th>Slug</th>
+                <th>头像</th>
+                <th>年龄</th>
+            </tr>
+            {% for user in users reversed  %} {# reversed代表反向遍历 #}
+                {# 如果是第一行，那么标记红色，如果是最后一行标记绿色 #}
+                {% comment %}
+                    如果是第一行，
+                    那么标记红色，
+                    如果是最后一行标记绿色
+                {% endcomment %}
+                {% if forloop.first %}
+                    <tr style="background-color: red">
+                {% elif forloop.last %}
+                    <tr style="background-color: green">
+                {% elif forloop.counter|divisibleby:2 %}
+                    <tr style="background-color: gray">
+                {% else %}
+                    <tr >
+                {% endif %}
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.userName }}</td>
+                    <td>{{ user.password }}</td>
+                    <td>{{ user.slugUrl|upper|lower }}</td>
+                    <td>
+                        {% if user.header is not None and user.header != '' %}
+                            <a href="http://ojaxu1scr.bkt.clouddn.com/{{ user.header }}">
+                                <img src="http://ojaxu1scr.bkt.clouddn.com/{{ user.header }}" width="45" height="45">
+                            </a>
+                        {% else %}
+                            <a href="https://www.fengdu100.com/uploads/allimg/180624/1J5135917-0.jpg">
+                                <img src="https://www.fengdu100.com/uploads/allimg/180624/1J5135917-0.jpg" width="45" height="45">
+                            </a>
+                        {% endif %}
+
+                    </td>
+                    <td>{{ user.age }}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+
+    </body>
+
+</html>
